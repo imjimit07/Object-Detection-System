@@ -21,3 +21,7 @@ while True:
     results = model.predict(source=0, conf=0.5, device=device, show=True) # detect objects in webcam feed
     for r in results:
         print(r)
+        for box in r.boxes:
+            cls = int(box.cls[0])
+            if classnames[cls] in [""person", "pen", "bottle", "phone", "headphones""]:
+                print(f"Detected: {classnames[cls]} with confidence {box.conf[0]:.2f}")
