@@ -1,5 +1,6 @@
 import torch
 from ultralytics import YOLO
+import time
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 if device == "cuda":
@@ -14,3 +15,9 @@ classnames = ["person", "pen", "bottle", "phone", "headphones"]
 
 prev_frame_time = 0
 new_frame_time = 0
+
+while True:
+    new_frame_time = time.time()
+    results = model.predict(source=0, conf=0.5, device=device, show=True) # detect objects in webcam feed
+    for r in results:
+        print(r)
